@@ -6,6 +6,61 @@
 
 @layer base {
   :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 10%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 240 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 330 85% 60%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 240 5% 92%;
+    --muted-foreground: 240 5% 45%;
+
+    --accent: 270 80% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 6% 85%;
+    --input: 240 6% 90%;
+    --ring: 210 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom Kiranagram tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 50%) 0%, hsl(210 90% 60%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(330 85% 60%) 0%, hsl(350 80% 65%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 98%) 0%, hsl(240 5% 95%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100% / 0.9) 0%, hsl(240 5% 98% / 0.8) 100%);
+    
+    --glow-primary: 0 0 20px hsl(210 100% 50% / 0.3);
+    --glow-secondary: 0 0 20px hsl(330 85% 60% / 0.3);
+    --glow-accent: 0 0 20px hsl(270 80% 60% / 0.3);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 10% 10%;
+    --sidebar-primary: 210 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 5% 94%;
+    --sidebar-accent-foreground: 240 10% 10%;
+    --sidebar-border: 240 6% 90%;
+    --sidebar-ring: 210 100% 50%;
+
+    /* Facebook blue */
+    --facebook: 220 46% 48%;
+    --facebook-foreground: 0 0% 100%;
+  }
+
+  .dark {
     --background: 240 10% 4%;
     --foreground: 0 0% 98%;
 
@@ -15,45 +70,45 @@
     --popover: 240 10% 8%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 187 100% 50%;
-    --primary-foreground: 240 10% 4%;
+    --primary: 210 100% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 270 91% 65%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 330 85% 60%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 240 10% 15%;
     --muted-foreground: 240 5% 65%;
 
-    --accent: 330 90% 60%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 270 80% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 0 0% 100%;
 
     --border: 240 10% 20%;
     --input: 240 10% 15%;
-    --ring: 187 100% 50%;
+    --ring: 210 100% 55%;
 
-    --radius: 0.75rem;
-
-    /* Custom Kiranagram tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(187 100% 50%) 0%, hsl(199 89% 48%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(270 91% 65%) 0%, hsl(330 90% 60%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 55%) 0%, hsl(210 90% 65%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(330 85% 60%) 0%, hsl(350 80% 65%) 100%);
     --gradient-dark: linear-gradient(180deg, hsl(240 10% 6%) 0%, hsl(240 15% 10%) 100%);
     --gradient-card: linear-gradient(135deg, hsl(240 10% 12% / 0.8) 0%, hsl(240 10% 8% / 0.6) 100%);
     
-    --glow-primary: 0 0 20px hsl(187 100% 50% / 0.4);
-    --glow-secondary: 0 0 20px hsl(270 91% 65% / 0.4);
-    --glow-accent: 0 0 20px hsl(330 90% 60% / 0.4);
+    --glow-primary: 0 0 20px hsl(210 100% 55% / 0.4);
+    --glow-secondary: 0 0 20px hsl(330 85% 60% / 0.4);
+    --glow-accent: 0 0 20px hsl(270 80% 60% / 0.4);
 
     --sidebar-background: 240 10% 6%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 187 100% 50%;
-    --sidebar-primary-foreground: 240 10% 4%;
+    --sidebar-primary: 210 100% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 10% 12%;
     --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 240 10% 15%;
-    --sidebar-ring: 187 100% 50%;
+    --sidebar-ring: 210 100% 55%;
+
+    --facebook: 220 46% 48%;
+    --facebook-foreground: 0 0% 100%;
   }
 }
 
