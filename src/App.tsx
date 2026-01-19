@@ -9,6 +9,11 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Explore from "./pages/Explore";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
+import Settings from "./pages/Settings";
+import AICreator from "./pages/AICreator";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +31,11 @@ const App = () => (
             <Route path="/signup" element={<Signup />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/ai-creator" element={<AICreator />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
