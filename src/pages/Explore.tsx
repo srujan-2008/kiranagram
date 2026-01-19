@@ -31,71 +31,71 @@ const Explore = () => {
 
   return (
     <MainLayout showRightSidebar={false}>
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="max-w-6xl mx-auto space-y-4 md:space-y-6 px-2 md:px-0 pb-20 md:pb-0">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="flex flex-col gap-3">
           <div>
-            <h1 className="text-3xl font-display font-bold mb-1">Explore</h1>
-            <p className="text-muted-foreground">Discover AI-generated art from creators worldwide</p>
+            <h1 className="text-2xl md:text-3xl font-display font-bold mb-1">Explore</h1>
+            <p className="text-sm md:text-base text-muted-foreground">Discover AI-generated art from creators worldwide</p>
           </div>
 
           {/* Search */}
-          <div className="relative w-full md:w-80">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+          <div className="relative w-full">
+            <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-4 md:w-5 h-4 md:h-5 text-muted-foreground" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search artwork..."
-              className="w-full pl-12 pr-4 py-3 bg-muted/50 border border-border/50 rounded-xl text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+              className="w-full pl-10 md:pl-12 pr-4 py-2.5 md:py-3 bg-muted/50 border border-border/50 rounded-xl text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
             />
           </div>
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          {/* Categories */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-hide w-full sm:w-auto">
+        <div className="flex flex-col gap-3">
+          {/* Categories - Scrollable on mobile */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide -mx-2 px-2">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap",
+                  "flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all whitespace-nowrap flex-shrink-0",
                   activeCategory === cat.id
                     ? "bg-primary text-primary-foreground glow-primary"
                     : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
               >
-                <cat.icon className="w-4 h-4" />
+                <cat.icon className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 {cat.label}
               </button>
             ))}
           </div>
 
           {/* View Mode & Filter */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-end gap-2">
             <button
               onClick={() => setViewMode("grid")}
               className={cn(
-                "p-2 rounded-lg transition-colors",
+                "p-1.5 md:p-2 rounded-lg transition-colors",
                 viewMode === "grid" ? "bg-primary/20 text-primary" : "text-muted-foreground hover:bg-muted"
               )}
             >
-              <Grid className="w-5 h-5" />
+              <Grid className="w-4 h-4 md:w-5 md:h-5" />
             </button>
             <button
               onClick={() => setViewMode("list")}
               className={cn(
-                "p-2 rounded-lg transition-colors",
+                "p-1.5 md:p-2 rounded-lg transition-colors",
                 viewMode === "list" ? "bg-primary/20 text-primary" : "text-muted-foreground hover:bg-muted"
               )}
             >
-              <List className="w-5 h-5" />
+              <List className="w-4 h-4 md:w-5 md:h-5" />
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 glass-card hover:bg-muted/50 transition-all rounded-xl">
-              <Filter className="w-4 h-4" />
-              <span className="text-sm">Filters</span>
+            <button className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 glass-card hover:bg-muted/50 transition-all rounded-xl">
+              <Filter className="w-3.5 h-3.5 md:w-4 md:h-4" />
+              <span className="text-xs md:text-sm">Filters</span>
             </button>
           </div>
         </div>

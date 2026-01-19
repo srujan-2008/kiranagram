@@ -15,7 +15,7 @@ const navItems: NavItem[] = [
   { icon: Home, label: "Feeds", path: "/" },
   { icon: Compass, label: "Discover", path: "/explore" },
   { icon: Plus, label: "Create New", path: "/create", isCreate: true },
-  { icon: Sparkles, label: "AI Creator", path: "/creator" },
+  { icon: Sparkles, label: "AI Creator", path: "/ai-creator" },
   { icon: User, label: "Profile", path: "/profile" },
 ];
 
@@ -27,28 +27,10 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Mobile Menu Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-card/80 backdrop-blur-xl border border-border rounded-xl"
-      >
-        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-      </button>
 
-      {/* Overlay */}
-      {isOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-background/80 backdrop-blur-sm z-40"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
+      {/* Sidebar - Hidden on mobile, visible on desktop */}
       <aside
-        className={cn(
-          "fixed lg:sticky top-0 left-0 h-screen w-64 bg-card/80 backdrop-blur-xl border-r border-border z-50 transition-transform duration-300 flex flex-col",
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        )}
+        className="hidden lg:flex fixed lg:sticky top-0 left-0 h-screen w-64 bg-card/80 backdrop-blur-xl border-r border-border z-50 flex-col"
       >
         {/* Logo */}
         <div className="p-6 border-b border-border">
