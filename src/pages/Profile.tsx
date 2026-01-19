@@ -6,7 +6,6 @@ import {
   Grid,
   Bookmark,
   Heart,
-  Users,
   Award,
   Link as LinkIcon,
   MapPin,
@@ -14,6 +13,7 @@ import {
   BadgeCheck,
 } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import avatar2 from "@/assets/avatar-2.jpg";
 import cyberGirl from "@/assets/cyber-girl.jpg";
@@ -47,9 +47,9 @@ const Profile = () => {
 
   return (
     <MainLayout showRightSidebar={false}>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto pb-20 md:pb-0">
         {/* Cover Photo */}
-        <div className="relative h-48 md:h-64 rounded-2xl overflow-hidden mb-16">
+        <div className="relative h-32 sm:h-48 md:h-64 rounded-none sm:rounded-2xl overflow-hidden">
           <img
             src={heroBanner}
             alt="Cover"
@@ -59,67 +59,72 @@ const Profile = () => {
         </div>
 
         {/* Profile Info */}
-        <div className="relative px-4 -mt-24">
-          {/* Avatar */}
-          <div className="flex flex-col md:flex-row md:items-end gap-4">
+        <div className="relative px-4 -mt-16 sm:-mt-20">
+          {/* Avatar and Actions Row */}
+          <div className="flex items-end justify-between mb-4">
+            {/* Avatar */}
             <div className="relative">
-              <div className="story-ring p-1">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full p-1 bg-gradient-to-r from-primary to-secondary">
                 <img
                   src={avatar2}
                   alt="Profile"
-                  className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover border-4 border-background"
+                  className="w-full h-full rounded-full object-cover border-4 border-background"
                 />
               </div>
-              <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-background" />
+              <div className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 w-5 h-5 sm:w-6 sm:h-6 bg-green-500 rounded-full border-2 border-background" />
             </div>
 
-            <div className="flex-1">
-              <div className="flex flex-col md:flex-row md:items-center gap-3 mb-3">
-                <div className="flex items-center gap-2">
-                  <h1 className="text-2xl font-display font-bold">Elara Vance</h1>
-                  <BadgeCheck className="w-6 h-6 text-primary fill-primary/20" />
-                </div>
-                <span className="badge-pro w-fit">PRO</span>
-              </div>
-              <p className="text-muted-foreground mb-4">@elaravance</p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap gap-3">
-                <button className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-cyan-400 text-primary-foreground rounded-xl font-medium text-sm hover:shadow-lg hover:shadow-primary/30 transition-all">
-                  <Users className="w-4 h-4" />
-                  Follow
-                </button>
-                <button className="flex items-center gap-2 px-5 py-2.5 glass-card hover:bg-muted/50 rounded-xl font-medium text-sm transition-all">
-                  <Share2 className="w-4 h-4" />
-                  Share
-                </button>
-                <button className="p-2.5 glass-card hover:bg-muted/50 rounded-xl transition-all">
-                  <Edit className="w-4 h-4" />
-                </button>
-                <button className="p-2.5 glass-card hover:bg-muted/50 rounded-xl transition-all">
-                  <Settings className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-
-            {/* Stats */}
-            <div className="flex gap-6 md:gap-8 py-4">
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <p className="text-xl md:text-2xl font-display font-bold">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
-                </div>
-              ))}
+            {/* Action Buttons - Right side on mobile */}
+            <div className="flex gap-2 mb-2">
+              <Link
+                to="/edit-profile"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-cyan-400 text-primary-foreground rounded-xl font-medium text-sm hover:shadow-lg hover:shadow-primary/30 transition-all"
+              >
+                <Edit className="w-4 h-4" />
+                <span className="hidden sm:inline">Edit</span>
+              </Link>
+              <button className="flex items-center gap-2 px-4 py-2 glass-card hover:bg-muted/50 rounded-xl font-medium text-sm transition-all">
+                <Share2 className="w-4 h-4" />
+                <span className="hidden sm:inline">Share</span>
+              </button>
+              <Link
+                to="/settings"
+                className="p-2 glass-card hover:bg-muted/50 rounded-xl transition-all"
+              >
+                <Settings className="w-4 h-4" />
+              </Link>
             </div>
           </div>
 
+          {/* Name and Username */}
+          <div className="mb-4">
+            <div className="flex items-center gap-2 mb-1">
+              <h1 className="text-xl sm:text-2xl font-display font-bold">Elara Vance</h1>
+              <BadgeCheck className="w-5 h-5 sm:w-6 sm:h-6 text-primary fill-primary/20" />
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="badge-pro">PRO</span>
+              <p className="text-muted-foreground text-sm">@elaravance</p>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="flex gap-6 py-4 border-y border-border">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-lg sm:text-xl md:text-2xl font-display font-bold">{stat.value}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+
           {/* Bio */}
-          <div className="mt-6 space-y-4">
-            <p className="text-foreground max-w-xl">
+          <div className="mt-4 space-y-3">
+            <p className="text-foreground text-sm sm:text-base">
               AI Artist & Digital Creator 🎨 Exploring the intersection of technology and creativity. Building the future, one prompt at a time. ✨
             </p>
 
-            <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+            <div className="flex flex-wrap gap-3 text-xs sm:text-sm text-muted-foreground">
               <span className="flex items-center gap-1">
                 <MapPin className="w-4 h-4" />
                 San Francisco, CA
@@ -141,14 +146,14 @@ const Profile = () => {
         </div>
 
         {/* Tabs */}
-        <div className="mt-8 border-b border-border">
-          <div className="flex gap-1">
+        <div className="mt-6 border-b border-border">
+          <div className="flex gap-1 px-4">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  "flex items-center gap-2 px-6 py-4 text-sm font-medium transition-colors relative",
+                  "flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium transition-colors relative",
                   activeTab === tab.id
                     ? "text-primary"
                     : "text-muted-foreground hover:text-foreground"
@@ -165,11 +170,11 @@ const Profile = () => {
         </div>
 
         {/* Posts Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2 mt-4">
+        <div className="grid grid-cols-3 gap-0.5 sm:gap-1 md:gap-2 mt-1 sm:mt-4">
           {posts.map((post, index) => (
             <div
               key={post.id}
-              className="group relative aspect-square overflow-hidden rounded-lg cursor-pointer animate-scale-in"
+              className="group relative aspect-square overflow-hidden cursor-pointer animate-scale-in"
               style={{ animationDelay: `${index * 50}ms` }}
             >
               <img
@@ -177,9 +182,9 @@ const Profile = () => {
                 alt="Post"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-6">
-                <span className="flex items-center gap-2 text-foreground font-medium">
-                  <Heart className="w-5 h-5 fill-current" />
+              <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 sm:gap-6">
+                <span className="flex items-center gap-1 sm:gap-2 text-foreground font-medium text-xs sm:text-base">
+                  <Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
                   {(post.likes / 1000).toFixed(1)}K
                 </span>
               </div>

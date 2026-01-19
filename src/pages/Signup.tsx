@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Sparkles, Mail, Lock, User, ArrowRight, Check } from "lucide-react";
+import { Eye, EyeOff, Sparkles, Mail, Lock, User, ArrowRight, Phone } from "lucide-react";
 import heroBanner from "@/assets/hero-banner.jpg";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
@@ -14,17 +15,6 @@ const Signup = () => {
     e.preventDefault();
     navigate("/");
   };
-
-  const passwordStrength = (pwd: string) => {
-    let strength = 0;
-    if (pwd.length >= 8) strength++;
-    if (/[A-Z]/.test(pwd)) strength++;
-    if (/[0-9]/.test(pwd)) strength++;
-    if (/[^A-Za-z0-9]/.test(pwd)) strength++;
-    return strength;
-  };
-
-  const strength = passwordStrength(password);
 
   return (
     <div className="min-h-screen flex">
@@ -129,6 +119,21 @@ const Signup = () => {
             </div>
 
             <div>
+              <label className="block text-sm font-medium mb-2 text-foreground">Mobile Number</label>
+              <div className="relative">
+                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <input
+                  type="tel"
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                  placeholder="Enter your mobile number"
+                  className="w-full pl-12 pr-4 py-3 bg-muted/50 border border-border rounded-xl text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary/50 transition-all"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
               <label className="block text-sm font-medium mb-2 text-foreground">Password</label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -148,46 +153,6 @@ const Signup = () => {
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
-
-              {/* Password Strength */}
-              {password && (
-                <div className="mt-3 space-y-2">
-                  <div className="flex gap-1">
-                    {[1, 2, 3, 4].map((level) => (
-                      <div
-                        key={level}
-                        className={`h-1 flex-1 rounded-full transition-colors ${
-                          strength >= level
-                            ? level <= 1
-                              ? "bg-destructive"
-                              : level <= 2
-                              ? "bg-yellow-500"
-                              : "bg-green-500"
-                            : "bg-muted"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-2 text-xs">
-                    {["8+ chars", "Uppercase", "Number", "Symbol"].map((req, i) => (
-                      <span
-                        key={req}
-                        className={`flex items-center gap-1 ${
-                          (i === 0 && password.length >= 8) ||
-                          (i === 1 && /[A-Z]/.test(password)) ||
-                          (i === 2 && /[0-9]/.test(password)) ||
-                          (i === 3 && /[^A-Za-z0-9]/.test(password))
-                            ? "text-green-500"
-                            : "text-muted-foreground"
-                        }`}
-                      >
-                        <Check className="w-3 h-3" />
-                        {req}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
 
             <div className="flex items-start gap-2">
@@ -198,11 +163,11 @@ const Signup = () => {
               />
               <span className="text-sm text-muted-foreground">
                 I agree to the{" "}
-                <Link to="/terms" className="text-secondary hover:underline">
+                <Link to="/terms" className="text-primary hover:underline">
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link to="/privacy" className="text-secondary hover:underline">
+                <Link to="/privacy" className="text-primary hover:underline">
                   Privacy Policy
                 </Link>
               </span>
@@ -219,7 +184,7 @@ const Signup = () => {
 
           <p className="text-center text-muted-foreground text-sm mt-8">
             Already have an account?{" "}
-            <Link to="/login" className="text-secondary hover:underline font-medium">
+            <Link to="/login" className="text-primary hover:underline font-medium">
               Sign in
             </Link>
           </p>
