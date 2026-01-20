@@ -1,30 +1,63 @@
-import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { MainLayout } from "@/components/layout/MainLayout";
 
 const Privacy = () => (
-  <div className="min-h-screen bg-background">
-    <header className="sticky top-0 z-30 bg-card/80 backdrop-blur-xl border-b border-border">
-      <div className="flex items-center gap-3 px-4 py-3">
-        <Link to="/settings" className="p-2 hover:bg-muted rounded-lg"><ArrowLeft className="w-5 h-5" /></Link>
-        <h1 className="font-display font-bold text-lg">Privacy Policy</h1>
+  <MainLayout showRightSidebar={false}>
+    <div className="max-w-3xl mx-auto px-2 md:px-0">
+      <h1 className="text-xl font-display font-bold mb-4">Privacy Policy</h1>
+      <div className="prose prose-sm dark:prose-invert max-w-none space-y-4">
+        <p className="text-muted-foreground">Last updated: January 2025</p>
+        
+        <div className="p-4 bg-card border border-border rounded-xl">
+          <h2 className="text-lg font-semibold mb-2">1. Information We Collect</h2>
+          <p className="text-sm text-muted-foreground">
+            We collect information you provide directly, including name, email, phone number, and profile information when you create an account. For AI Creators, we also collect identity verification documents (Aadhaar, PAN) and bank details for payment processing.
+          </p>
+        </div>
+
+        <div className="p-4 bg-card border border-border rounded-xl">
+          <h2 className="text-lg font-semibold mb-2">2. How We Use Your Information</h2>
+          <p className="text-sm text-muted-foreground">
+            We use your information to provide and improve our services, process transactions, send notifications, verify creator identities, process payments, and ensure platform security.
+          </p>
+        </div>
+
+        <div className="p-4 bg-card border border-border rounded-xl">
+          <h2 className="text-lg font-semibold mb-2">3. Information Sharing</h2>
+          <p className="text-sm text-muted-foreground">
+            We do not sell your personal information. We may share data with service providers who assist in operating our platform, payment processors, and identity verification services.
+          </p>
+        </div>
+
+        <div className="p-4 bg-card border border-border rounded-xl">
+          <h2 className="text-lg font-semibold mb-2">4. Data Security</h2>
+          <p className="text-sm text-muted-foreground">
+            We implement industry-standard security measures including encryption, secure storage, and access controls to protect your data from unauthorized access.
+          </p>
+        </div>
+
+        <div className="p-4 bg-card border border-border rounded-xl">
+          <h2 className="text-lg font-semibold mb-2">5. Your Rights</h2>
+          <p className="text-sm text-muted-foreground">
+            You have the right to access, update, or delete your personal information at any time through your account settings. You can also request a copy of your data or opt out of marketing communications.
+          </p>
+        </div>
+
+        <div className="p-4 bg-card border border-border rounded-xl">
+          <h2 className="text-lg font-semibold mb-2">6. Cookies & Tracking</h2>
+          <p className="text-sm text-muted-foreground">
+            We use cookies and similar technologies to enhance your experience, analyze usage patterns, and personalize content. You can manage cookie preferences in your browser settings.
+          </p>
+        </div>
+
+        <div className="p-4 bg-card border border-border rounded-xl">
+          <h2 className="text-lg font-semibold mb-2">7. Contact Us</h2>
+          <p className="text-sm text-muted-foreground">
+            For questions about this policy or to exercise your data rights, contact us at privacy@kiranagram.com
+          </p>
+        </div>
       </div>
-    </header>
-    <div className="max-w-3xl mx-auto px-4 py-8 prose prose-invert prose-sm">
-      <p className="text-muted-foreground">Last updated: January 2025</p>
-      <h2>1. Information We Collect</h2>
-      <p>We collect information you provide directly, including name, email, phone number, and profile information when you create an account.</p>
-      <h2>2. How We Use Your Information</h2>
-      <p>We use your information to provide and improve our services, process transactions, send notifications, and ensure platform security.</p>
-      <h2>3. Information Sharing</h2>
-      <p>We do not sell your personal information. We may share data with service providers who assist in operating our platform.</p>
-      <h2>4. Data Security</h2>
-      <p>We implement industry-standard security measures to protect your data from unauthorized access.</p>
-      <h2>5. Your Rights</h2>
-      <p>You have the right to access, update, or delete your personal information at any time through your account settings.</p>
-      <h2>6. Contact Us</h2>
-      <p>For questions about this policy, contact us at privacy@kiranagram.com</p>
     </div>
-  </div>
+  </MainLayout>
 );
 
 export default Privacy;

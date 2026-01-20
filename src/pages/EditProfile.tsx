@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Camera, User, Mail, Phone, MapPin, Link as LinkIcon, Save } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Camera, User, Mail, Phone, MapPin, Link as LinkIcon, Save } from "lucide-react";
 import avatar2 from "@/assets/avatar-2.jpg";
 import heroBanner from "@/assets/hero-banner.jpg";
+import { MainLayout } from "@/components/layout/MainLayout";
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -22,21 +23,15 @@ const EditProfile = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Save profile logic here
     navigate("/profile");
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-30 bg-card/80 backdrop-blur-xl border-b border-border">
-        <div className="flex items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-3">
-            <Link to="/profile" className="p-2 hover:bg-muted rounded-lg transition-colors">
-              <ArrowLeft className="w-5 h-5" />
-            </Link>
-            <h1 className="font-display font-bold text-lg">Edit Profile</h1>
-          </div>
+    <MainLayout showRightSidebar={false}>
+      <div className="max-w-2xl mx-auto">
+        {/* Header with Save */}
+        <div className="flex items-center justify-between mb-4 px-2">
+          <h1 className="text-xl font-display font-bold">Edit Profile</h1>
           <button
             onClick={handleSubmit}
             className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all"
@@ -45,11 +40,9 @@ const EditProfile = () => {
             Save
           </button>
         </div>
-      </header>
 
-      <div className="max-w-2xl mx-auto pb-20">
         {/* Cover Photo */}
-        <div className="relative h-32 sm:h-48">
+        <div className="relative h-32 sm:h-48 rounded-xl overflow-hidden">
           <img
             src={heroBanner}
             alt="Cover"
@@ -77,7 +70,7 @@ const EditProfile = () => {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="px-4 py-6 space-y-5">
+        <form onSubmit={handleSubmit} className="px-2 py-6 space-y-5">
           <div>
             <label className="block text-sm font-medium mb-2 text-foreground">Full Name</label>
             <div className="relative">
@@ -175,7 +168,7 @@ const EditProfile = () => {
           </div>
         </form>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 
