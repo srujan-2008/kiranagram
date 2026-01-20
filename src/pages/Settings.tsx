@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import {
-  ArrowLeft,
   User,
   Bell,
   Shield,
@@ -16,13 +15,13 @@ import {
   CreditCard,
 } from "lucide-react";
 import { useTheme } from "next-themes";
+import { MainLayout } from "@/components/layout/MainLayout";
 
 const Settings = () => {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
 
   const handleLogout = () => {
-    // Logout logic here
     navigate("/login");
   };
 
@@ -69,24 +68,16 @@ const Settings = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-30 bg-card/80 backdrop-blur-xl border-b border-border">
-        <div className="flex items-center gap-3 px-4 py-3">
-          <Link to="/profile" className="p-2 hover:bg-muted rounded-lg transition-colors">
-            <ArrowLeft className="w-5 h-5" />
-          </Link>
-          <h1 className="font-display font-bold text-lg">Settings</h1>
-        </div>
-      </header>
-
-      <div className="max-w-2xl mx-auto pb-32">
+    <MainLayout showRightSidebar={false}>
+      <div className="max-w-2xl mx-auto">
+        <h1 className="text-xl font-display font-bold mb-4 px-2">Settings</h1>
+        
         {settingsSections.map((section) => (
-          <div key={section.title} className="py-4">
-            <h2 className="px-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+          <div key={section.title} className="py-3">
+            <h2 className="px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
               {section.title}
             </h2>
-            <div className="bg-card border-y border-border">
+            <div className="bg-card border border-border rounded-xl overflow-hidden">
               {section.items.map((item, index) => (
                 <div key={item.label}>
                   {item.toggle ? (
@@ -137,7 +128,7 @@ const Settings = () => {
         ))}
 
         {/* Logout Button */}
-        <div className="px-4 py-6">
+        <div className="px-2 py-6">
           <button
             onClick={handleLogout}
             className="w-full flex items-center justify-center gap-2 py-3 bg-destructive/10 text-destructive hover:bg-destructive/20 rounded-xl font-medium transition-colors"
@@ -152,7 +143,7 @@ const Settings = () => {
           Kiranagram v1.0.0
         </p>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 
