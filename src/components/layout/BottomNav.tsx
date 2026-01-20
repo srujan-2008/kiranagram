@@ -30,16 +30,25 @@ export function BottomNav() {
             key={item.path}
             to={item.path}
             className={cn(
-              "flex flex-col items-center gap-1 py-2 px-3 rounded-xl transition-all duration-300 min-w-[56px]",
+              "flex flex-col items-center gap-1 py-2 px-3 rounded-xl transition-all duration-300",
               item.isCreate
-                ? "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground -mt-4 shadow-lg"
+                ? "relative -mt-5"
                 : isActive(item.path)
                 ? "text-primary"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            <item.icon className={cn("w-5 h-5", item.isCreate && "w-6 h-6")} />
-            <span className={cn("text-[10px] font-medium", item.isCreate && "text-xs")}>
+            {item.isCreate ? (
+              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-cyan-400 flex items-center justify-center shadow-lg shadow-primary/30">
+                <item.icon className="w-6 h-6 text-primary-foreground" />
+              </div>
+            ) : (
+              <item.icon className="w-5 h-5" />
+            )}
+            <span className={cn(
+              "text-[10px] font-medium",
+              item.isCreate && "mt-1"
+            )}>
               {item.label}
             </span>
           </Link>

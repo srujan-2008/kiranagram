@@ -14,6 +14,10 @@ import Settings from "./pages/Settings";
 import AICreator from "./pages/AICreator";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import CreatorEarnings from "./pages/CreatorEarnings";
+import CreatorPrompts from "./pages/CreatorPrompts";
+import AddNewPrompt from "./pages/AddNewPrompt";
+import EditCreatorProfile from "./pages/EditCreatorProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +38,10 @@ const App = () => (
             <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/ai-creator" element={<AICreator />} />
+            <Route path="/ai-creator/earnings" element={<CreatorEarnings />} />
+            <Route path="/ai-creator/prompts" element={<CreatorPrompts />} />
+            <Route path="/ai-creator/add-prompt" element={<AddNewPrompt />} />
+            <Route path="/ai-creator/edit-profile" element={<EditCreatorProfile />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
