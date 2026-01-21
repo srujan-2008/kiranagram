@@ -82,53 +82,53 @@ const Explore = () => {
 
   return (
     <MainLayout showRightSidebar={false}>
-      <div className="max-w-6xl mx-auto pb-24 md:pb-8 px-3 md:px-4">
+      <div className="max-w-6xl mx-auto pb-20 md:pb-8 px-3 md:px-4 overflow-x-hidden">
         
-        {/* Header with Search & Shuffle */}
-        <div className="flex items-center gap-3 mb-6">
+        {/* Search & Shuffle - Static header area */}
+        <div className="flex items-center gap-3 mb-4 md:mb-6">
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-4 md:w-5 h-4 md:h-5 text-muted-foreground" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Discover AI styles, creators..."
-              className="w-full pl-12 pr-4 py-3 bg-card border border-border rounded-2xl text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+              className="w-full pl-10 md:pl-12 pr-4 py-2.5 md:py-3 bg-card border border-border rounded-xl md:rounded-2xl text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
             />
           </div>
           <button 
             onClick={handleShuffle}
             className={cn(
-              "p-3 rounded-2xl bg-gradient-to-br from-primary to-secondary text-primary-foreground transition-all hover:scale-105 active:scale-95",
+              "p-2.5 md:p-3 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary to-secondary text-primary-foreground transition-all hover:scale-105 active:scale-95 flex-shrink-0",
               isShuffling && "animate-spin"
             )}
           >
-            <Shuffle className="w-5 h-5" />
+            <Shuffle className="w-4 md:w-5 h-4 md:h-5" />
           </button>
         </div>
 
         {/* Style Categories - Horizontal Scroll */}
-        <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide -mx-3 px-3 mb-6">
+        <div className="flex gap-2 overflow-x-auto pb-3 md:pb-4 scrollbar-hide -mx-3 px-3 mb-4 md:mb-6">
           {styleCategories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
               className={cn(
-                "flex items-center gap-2 px-4 py-2.5 rounded-2xl text-sm font-medium transition-all whitespace-nowrap flex-shrink-0",
+                "flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 md:py-2.5 rounded-xl md:rounded-2xl text-xs md:text-sm font-medium transition-all whitespace-nowrap flex-shrink-0",
                 activeCategory === cat.id
                   ? `bg-gradient-to-r ${cat.gradient} text-white shadow-lg`
                   : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-primary/50"
               )}
             >
-              <cat.icon className="w-4 h-4" />
+              <cat.icon className="w-3.5 md:w-4 h-3.5 md:h-4" />
               {cat.label}
             </button>
           ))}
         </div>
 
         {/* Spotlight Section */}
-        <div className="relative mb-8 rounded-3xl overflow-hidden group cursor-pointer">
-          <div className="aspect-[21/9] md:aspect-[3/1]">
+        <div className="relative mb-6 md:mb-8 rounded-2xl md:rounded-3xl overflow-hidden group cursor-pointer">
+          <div className="aspect-[16/9] md:aspect-[3/1]">
             <img 
               src={spotlightArt.image} 
               alt={spotlightArt.title}
@@ -141,34 +141,34 @@ const Explore = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
           
           {/* Spotlight Badge */}
-          <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/90 text-primary-foreground text-xs font-semibold backdrop-blur-sm">
-            <Crown className="w-3.5 h-3.5" />
+          <div className="absolute top-3 left-3 md:top-4 md:left-4 flex items-center gap-1.5 md:gap-2 px-2.5 md:px-3 py-1 md:py-1.5 rounded-full bg-primary/90 text-primary-foreground text-[10px] md:text-xs font-semibold backdrop-blur-sm">
+            <Crown className="w-3 md:w-3.5 h-3 md:h-3.5" />
             Today's Spotlight
           </div>
           
           {/* Content */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-            <div className="flex items-end justify-between gap-4">
-              <div className="flex-1">
-                <p className="text-xs text-primary font-medium mb-1">{spotlightArt.style}</p>
-                <h2 className="text-xl md:text-2xl font-display font-bold mb-2">{spotlightArt.title}</h2>
-                <div className="flex items-center gap-3">
+          <div className="absolute bottom-0 left-0 right-0 p-3 md:p-6">
+            <div className="flex items-end justify-between gap-3 md:gap-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-[10px] md:text-xs text-primary font-medium mb-0.5 md:mb-1">{spotlightArt.style}</p>
+                <h2 className="text-base md:text-2xl font-display font-bold mb-1.5 md:mb-2 truncate">{spotlightArt.title}</h2>
+                <div className="flex items-center gap-2 md:gap-3">
                   <img 
                     src={spotlightArt.creatorAvatar} 
                     alt={spotlightArt.creator}
-                    className="w-8 h-8 rounded-full border-2 border-primary"
+                    className="w-6 md:w-8 h-6 md:h-8 rounded-full border-2 border-primary"
                   />
-                  <span className="text-sm font-medium">{spotlightArt.creator}</span>
+                  <span className="text-xs md:text-sm font-medium">{spotlightArt.creator}</span>
                 </div>
               </div>
-              <div className="flex items-center gap-4 text-sm">
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Eye className="w-4 h-4" />
-                  <span>{spotlightArt.views}</span>
+              <div className="flex items-center gap-3 md:gap-4 text-xs md:text-sm">
+                <div className="flex items-center gap-1 md:gap-1.5 text-muted-foreground">
+                  <Eye className="w-3.5 md:w-4 h-3.5 md:h-4" />
+                  <span className="text-[10px] md:text-sm">{spotlightArt.views}</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Heart className="w-4 h-4" />
-                  <span>{spotlightArt.likes}</span>
+                <div className="flex items-center gap-1 md:gap-1.5 text-muted-foreground">
+                  <Heart className="w-3.5 md:w-4 h-3.5 md:h-4" />
+                  <span className="text-[10px] md:text-sm">{spotlightArt.likes}</span>
                 </div>
               </div>
             </div>
@@ -176,19 +176,19 @@ const Explore = () => {
         </div>
 
         {/* Featured Styles */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-display font-semibold">Trending Styles</h3>
-            <button className="flex items-center gap-1 text-sm text-primary hover:underline">
-              See all <ChevronRight className="w-4 h-4" />
+        <div className="mb-6 md:mb-8">
+          <div className="flex items-center justify-between mb-3 md:mb-4">
+            <h3 className="text-base md:text-lg font-display font-semibold">Trending Styles</h3>
+            <button className="flex items-center gap-1 text-xs md:text-sm text-primary hover:underline">
+              See all <ChevronRight className="w-3.5 md:w-4 h-3.5 md:h-4" />
             </button>
           </div>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-3 gap-2 md:gap-3">
             {featuredStyles.map((style) => (
               <div 
                 key={style.id}
                 className={cn(
-                  "relative rounded-2xl overflow-hidden cursor-pointer group",
+                  "relative rounded-xl md:rounded-2xl overflow-hidden cursor-pointer group",
                   "bg-gradient-to-br",
                   style.color
                 )}
@@ -201,9 +201,9 @@ const Explore = () => {
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-3">
-                  <p className="font-semibold text-sm truncate">{style.name}</p>
-                  <p className="text-xs text-muted-foreground">{style.uses} uses</p>
+                <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3">
+                  <p className="font-semibold text-xs md:text-sm truncate">{style.name}</p>
+                  <p className="text-[10px] md:text-xs text-muted-foreground">{style.uses} uses</p>
                 </div>
               </div>
             ))}
@@ -211,22 +211,22 @@ const Explore = () => {
         </div>
 
         {/* Top Creators */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-display font-semibold">Top Creators</h3>
-            <button className="flex items-center gap-1 text-sm text-primary hover:underline">
-              See all <ChevronRight className="w-4 h-4" />
+        <div className="mb-6 md:mb-8">
+          <div className="flex items-center justify-between mb-3 md:mb-4">
+            <h3 className="text-base md:text-lg font-display font-semibold">Top Creators</h3>
+            <button className="flex items-center gap-1 text-xs md:text-sm text-primary hover:underline">
+              See all <ChevronRight className="w-3.5 md:w-4 h-3.5 md:h-4" />
             </button>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-3 px-3">
+          <div className="flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-3 px-3">
             {topCreators.map((creator, index) => (
               <div 
                 key={creator.id}
-                className="flex-shrink-0 w-28 flex flex-col items-center p-4 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all cursor-pointer group"
+                className="flex-shrink-0 w-24 md:w-28 flex flex-col items-center p-3 md:p-4 rounded-xl md:rounded-2xl bg-card border border-border hover:border-primary/50 transition-all cursor-pointer group"
               >
                 <div className="relative mb-2">
                   <div className={cn(
-                    "w-16 h-16 rounded-full p-0.5",
+                    "w-12 md:w-16 h-12 md:h-16 rounded-full p-0.5",
                     index === 0 ? "bg-gradient-to-r from-primary to-secondary" : "bg-gradient-to-r from-muted to-muted-foreground/30"
                   )}>
                     <img 
@@ -236,13 +236,13 @@ const Explore = () => {
                     />
                   </div>
                   {index === 0 && (
-                    <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                      <Crown className="w-3.5 h-3.5 text-primary-foreground" />
+                    <div className="absolute -top-1 -right-1 w-5 md:w-6 h-5 md:h-6 rounded-full bg-primary flex items-center justify-center">
+                      <Crown className="w-3 md:w-3.5 h-3 md:h-3.5 text-primary-foreground" />
                     </div>
                   )}
                 </div>
-                <p className="text-sm font-semibold truncate w-full text-center">{creator.name}</p>
-                <p className="text-xs text-muted-foreground">{creator.followers}</p>
+                <p className="text-xs md:text-sm font-semibold truncate w-full text-center">{creator.name}</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground">{creator.followers}</p>
               </div>
             ))}
           </div>
@@ -250,27 +250,27 @@ const Explore = () => {
 
         {/* Discovery Grid - Unique Layout */}
         <div className="mb-6">
-          <h3 className="text-lg font-display font-semibold mb-4">Discover Art</h3>
+          <h3 className="text-base md:text-lg font-display font-semibold mb-3 md:mb-4">Discover Art</h3>
           <div className={cn(
-            "grid gap-3 transition-opacity duration-300",
+            "grid gap-2 md:gap-3 transition-opacity duration-300",
             isShuffling && "opacity-50"
           )} style={{
-            gridTemplateColumns: 'repeat(6, 1fr)',
-            gridAutoRows: '100px'
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gridAutoRows: '90px'
           }}>
             {discoveryGrid.map((item, index) => {
-              // Create unique sizing for each item
+              // Simpler grid for mobile - all same size
               const sizeClasses = {
-                large: "col-span-3 row-span-3 md:col-span-2 md:row-span-3",
-                medium: "col-span-3 row-span-2 md:col-span-2 md:row-span-2",
-                small: "col-span-2 row-span-2 md:col-span-2 md:row-span-2"
+                large: "col-span-2 row-span-2",
+                medium: "col-span-1 row-span-2",
+                small: "col-span-1 row-span-2"
               };
               
               return (
                 <div
                   key={item.id}
                   className={cn(
-                    "relative rounded-2xl overflow-hidden cursor-pointer group",
+                    "relative rounded-xl md:rounded-2xl overflow-hidden cursor-pointer group",
                     sizeClasses[item.size as keyof typeof sizeClasses]
                   )}
                   style={{ animationDelay: `${index * 50}ms` }}
@@ -285,17 +285,17 @@ const Explore = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
                   
                   {/* Content on Hover */}
-                  <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-xs text-primary font-medium">{item.style}</p>
-                    <p className="text-sm font-semibold truncate">{item.creator}</p>
-                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1">
-                      <Heart className="w-3.5 h-3.5" />
+                  <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <p className="text-[10px] md:text-xs text-primary font-medium">{item.style}</p>
+                    <p className="text-xs md:text-sm font-semibold truncate">{item.creator}</p>
+                    <div className="flex items-center gap-1 md:gap-1.5 text-[10px] md:text-xs text-muted-foreground mt-0.5 md:mt-1">
+                      <Heart className="w-3 md:w-3.5 h-3 md:h-3.5" />
                       <span>{formatCount(item.likes)}</span>
                     </div>
                   </div>
                   
                   {/* Glow Effect on Hover */}
-                  <div className="absolute inset-0 rounded-2xl ring-2 ring-primary/0 group-hover:ring-primary/50 transition-all duration-300" />
+                  <div className="absolute inset-0 rounded-xl md:rounded-2xl ring-2 ring-primary/0 group-hover:ring-primary/50 transition-all duration-300" />
                 </div>
               );
             })}
@@ -303,8 +303,8 @@ const Explore = () => {
         </div>
 
         {/* Load More */}
-        <div className="flex justify-center">
-          <button className="px-8 py-3 rounded-2xl bg-card border border-border hover:border-primary/50 hover:bg-primary/5 transition-all font-medium">
+        <div className="flex justify-center pb-4">
+          <button className="px-6 md:px-8 py-2.5 md:py-3 rounded-xl md:rounded-2xl bg-card border border-border hover:border-primary/50 hover:bg-primary/5 transition-all font-medium text-sm md:text-base">
             Explore More
           </button>
         </div>
