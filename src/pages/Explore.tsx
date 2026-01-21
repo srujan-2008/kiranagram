@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MainLayout } from "@/components/layout/MainLayout";
-import { Search, Filter, Grid, List, Sparkles, TrendingUp, Clock, Star } from "lucide-react";
+import { Search, Heart, MessageCircle, Grid, Film, Bookmark, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import cyberGirl from "@/assets/cyber-girl.jpg";
 import avatar1 from "@/assets/avatar-1.jpg";
@@ -8,138 +8,102 @@ import avatar2 from "@/assets/avatar-2.jpg";
 import avatar3 from "@/assets/avatar-3.jpg";
 import heroBanner from "@/assets/hero-banner.jpg";
 
-const categories = [
-  { id: "all", label: "All", icon: Sparkles },
-  { id: "trending", label: "Trending", icon: TrendingUp },
-  { id: "recent", label: "Recent", icon: Clock },
-  { id: "top", label: "Top Rated", icon: Star },
-];
-
 const exploreItems = [
-  { id: 1, image: cyberGirl, title: "Cyber Portrait", creator: "NeonDreamer", likes: 2.4, views: 12.5 },
-  { id: 2, image: avatar1, title: "Neon Dreams", creator: "SynthArt", likes: 1.8, views: 8.2 },
-  { id: 3, image: avatar2, title: "Digital Muse", creator: "PixelMist", likes: 3.2, views: 15.1 },
-  { id: 4, image: avatar3, title: "AI Entity", creator: "CodexAI", likes: 1.5, views: 6.8 },
-  { id: 5, image: heroBanner, title: "Neon City", creator: "CyberScape", likes: 4.1, views: 22.3 },
-  { id: 6, image: cyberGirl, title: "Future Self", creator: "SynthWave", likes: 2.8, views: 11.7 },
+  { id: 1, image: cyberGirl, likes: 2400, comments: 89, isVideo: false },
+  { id: 2, image: avatar1, likes: 1800, comments: 45, isVideo: true },
+  { id: 3, image: avatar2, likes: 3200, comments: 127, isVideo: false },
+  { id: 4, image: avatar3, likes: 1500, comments: 32, isVideo: false },
+  { id: 5, image: heroBanner, likes: 4100, comments: 203, isVideo: true },
+  { id: 6, image: cyberGirl, likes: 2800, comments: 95, isVideo: false },
+  { id: 7, image: avatar1, likes: 890, comments: 21, isVideo: false },
+  { id: 8, image: avatar2, likes: 5600, comments: 312, isVideo: true },
+  { id: 9, image: avatar3, likes: 1200, comments: 54, isVideo: false },
+  { id: 10, image: heroBanner, likes: 7800, comments: 456, isVideo: false },
+  { id: 11, image: cyberGirl, likes: 3400, comments: 178, isVideo: true },
+  { id: 12, image: avatar1, likes: 2100, comments: 67, isVideo: false },
 ];
 
 const Explore = () => {
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [searchQuery, setSearchQuery] = useState("");
+  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+
+  const formatCount = (count: number) => {
+    if (count >= 1000) {
+      return (count / 1000).toFixed(1).replace('.0', '') + 'K';
+    }
+    return count.toString();
+  };
 
   return (
     <MainLayout showRightSidebar={false}>
-      <div className="max-w-6xl mx-auto space-y-4 md:space-y-6 px-2 md:px-0 pb-20 md:pb-0">
-        {/* Header */}
-        <div className="flex flex-col gap-3">
-          <div>
-            <h1 className="text-2xl md:text-3xl font-display font-bold mb-1">Explore</h1>
-            <p className="text-sm md:text-base text-muted-foreground">Discover AI-generated art from creators worldwide</p>
-          </div>
-
-          {/* Search */}
-          <div className="relative w-full">
-            <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-4 md:w-5 h-4 md:h-5 text-muted-foreground" />
+      <div className="max-w-4xl mx-auto pb-20 md:pb-0">
+        {/* Search Bar - Instagram Style */}
+        <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm px-3 py-3">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search artwork..."
-              className="w-full pl-10 md:pl-12 pr-4 py-2.5 md:py-3 bg-muted/50 border border-border/50 rounded-xl text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+              placeholder="Search"
+              className="w-full pl-9 pr-4 py-2 bg-muted/60 border-0 rounded-lg text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all"
             />
           </div>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-col gap-3">
-          {/* Categories - Scrollable on mobile */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide -mx-2 px-2">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={cn(
-                  "flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all whitespace-nowrap flex-shrink-0",
-                  activeCategory === cat.id
-                    ? "bg-primary text-primary-foreground glow-primary"
-                    : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
-                )}
-              >
-                <cat.icon className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                {cat.label}
-              </button>
-            ))}
-          </div>
+        {/* Instagram-Style Masonry Grid */}
+        <div className="px-0.5">
+          <div className="grid grid-cols-3 gap-0.5">
+            {exploreItems.map((item, index) => {
+              // Create Instagram-like layout with some larger tiles
+              const isLarge = index % 9 === 0 || index % 9 === 5;
+              
+              return (
+                <div
+                  key={item.id}
+                  className={cn(
+                    "relative aspect-square overflow-hidden cursor-pointer group",
+                    isLarge && "col-span-2 row-span-2"
+                  )}
+                  onMouseEnter={() => setHoveredItem(item.id)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                >
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                  
+                  {/* Video indicator */}
+                  {item.isVideo && (
+                    <div className="absolute top-2 right-2">
+                      <Film className="w-5 h-5 text-white drop-shadow-lg" />
+                    </div>
+                  )}
 
-          {/* View Mode & Filter */}
-          <div className="flex items-center justify-end gap-2">
-            <button
-              onClick={() => setViewMode("grid")}
-              className={cn(
-                "p-1.5 md:p-2 rounded-lg transition-colors",
-                viewMode === "grid" ? "bg-primary/20 text-primary" : "text-muted-foreground hover:bg-muted"
-              )}
-            >
-              <Grid className="w-4 h-4 md:w-5 md:h-5" />
-            </button>
-            <button
-              onClick={() => setViewMode("list")}
-              className={cn(
-                "p-1.5 md:p-2 rounded-lg transition-colors",
-                viewMode === "list" ? "bg-primary/20 text-primary" : "text-muted-foreground hover:bg-muted"
-              )}
-            >
-              <List className="w-4 h-4 md:w-5 md:h-5" />
-            </button>
-            <button className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 glass-card hover:bg-muted/50 transition-all rounded-xl">
-              <Filter className="w-3.5 h-3.5 md:w-4 md:h-4" />
-              <span className="text-xs md:text-sm">Filters</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Grid */}
-        <div
-          className={cn(
-            "grid gap-4",
-            viewMode === "grid"
-              ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
-              : "grid-cols-1"
-          )}
-        >
-          {exploreItems.map((item, index) => (
-            <div
-              key={item.id}
-              className="group glass-card overflow-hidden animate-scale-in cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all"
-              style={{ animationDelay: `${index * 50}ms` }}
-            >
-              <div className="relative aspect-square overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform">
-                  <p className="font-semibold text-sm truncate">{item.title}</p>
-                  <p className="text-xs text-muted-foreground">by {item.creator}</p>
+                  {/* Hover overlay with stats - Instagram style */}
+                  <div className={cn(
+                    "absolute inset-0 bg-black/40 flex items-center justify-center gap-6 transition-opacity duration-200",
+                    hoveredItem === item.id ? "opacity-100" : "opacity-0"
+                  )}>
+                    <div className="flex items-center gap-1.5 text-white font-semibold">
+                      <Heart className="w-5 h-5 fill-white" />
+                      <span>{formatCount(item.likes)}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-white font-semibold">
+                      <MessageCircle className="w-5 h-5 fill-white" />
+                      <span>{formatCount(item.comments)}</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="p-3 flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">{item.likes}k likes</span>
-                <span className="text-xs text-muted-foreground">{item.views}k views</span>
-              </div>
-            </div>
-          ))}
+              );
+            })}
+          </div>
         </div>
 
-        {/* Load More */}
-        <div className="text-center py-8">
-          <button className="px-8 py-3 glass-card hover:bg-muted/50 transition-all rounded-xl font-medium">
-            Load More
-          </button>
+        {/* Load More Indicator */}
+        <div className="py-8 flex justify-center">
+          <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
         </div>
       </div>
     </MainLayout>

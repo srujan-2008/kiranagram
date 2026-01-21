@@ -39,7 +39,7 @@ export function BottomNav() {
             )}
           >
             {item.isCreate ? (
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-cyan-400 flex items-center justify-center shadow-lg shadow-primary/30">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/30">
                 <item.icon className="w-6 h-6 text-primary-foreground" />
               </div>
             ) : (
