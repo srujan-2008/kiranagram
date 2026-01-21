@@ -1,14 +1,10 @@
 import { Sun, Moon, Bell } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTheme } from "next-themes";
 import avatar2 from "@/assets/avatar-2.jpg";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
-  const location = useLocation();
-  
-  // Hide search bar on Explore page since it has its own search
-  const hideSearch = location.pathname === "/explore";
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -25,18 +21,16 @@ export function Header() {
           <span className="font-display font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">Kiranagram</span>
         </Link>
 
-        {/* Desktop Search Bar - Hidden on mobile and on Explore page */}
-        {!hideSearch && (
-          <div className="hidden lg:flex flex-1 max-w-xl mx-4">
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Search creators, assets, or inspiration..."
-                className="w-full pl-12 pr-16 py-3 bg-muted/50 border border-border rounded-xl text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
-              />
-            </div>
+        {/* Desktop Search Bar - Hidden on mobile */}
+        <div className="hidden lg:flex flex-1 max-w-xl mx-4">
+          <div className="relative w-full">
+            <input
+              type="text"
+              placeholder="Search creators, assets, or inspiration..."
+              className="w-full pl-12 pr-16 py-3 bg-muted/50 border border-border rounded-xl text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+            />
           </div>
-        )}
+        </div>
 
         {/* Right Actions - Simplified for mobile */}
         <div className="flex items-center gap-2 lg:gap-3">

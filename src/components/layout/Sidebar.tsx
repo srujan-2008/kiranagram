@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, Compass, Plus, Sparkles, User, Megaphone } from "lucide-react";
+import { Home, Compass, Plus, Sparkles, User, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import avatar2 from "@/assets/avatar-2.jpg";
 
@@ -67,15 +67,6 @@ export function Sidebar() {
               <span className="font-medium">{item.label}</span>
             </Link>
           ))}
-          
-          {/* Become a Publisher - Desktop only */}
-          <Link
-            to="/become-publisher"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 mt-4 border border-dashed border-primary/50 text-primary hover:bg-primary/10"
-          >
-            <Megaphone className="w-5 h-5" />
-            <span className="font-medium text-sm">Become a Publisher</span>
-          </Link>
         </nav>
 
         {/* User Profile */}
