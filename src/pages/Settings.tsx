@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   User,
@@ -13,6 +14,7 @@ import {
   Eye,
   Lock,
   CreditCard,
+  Users,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { MainLayout } from "@/components/layout/MainLayout";
@@ -20,6 +22,7 @@ import { MainLayout } from "@/components/layout/MainLayout";
 const Settings = () => {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
+  const [isPrivateAccount, setIsPrivateAccount] = useState(false);
 
   const handleLogout = () => {
     navigate("/login");
@@ -36,10 +39,26 @@ const Settings = () => {
       ],
     },
     {
+      title: "Privacy",
+      items: [
+        {
+          icon: Users,
+          label: "Private Account",
+          toggle: true,
+          checked: isPrivateAccount,
+          onChange: () => setIsPrivateAccount(!isPrivateAccount),
+          description: isPrivateAccount 
+            ? "Only approved followers can see your posts" 
+            : "Anyone can see your posts",
+        },
+        { icon: Eye, label: "Activity Status", link: "#" },
+        { icon: Shield, label: "Blocked Accounts", link: "#" },
+      ],
+    },
+    {
       title: "Preferences",
       items: [
         { icon: Bell, label: "Notifications", link: "#" },
-        { icon: Eye, label: "Privacy", link: "#" },
         { icon: Globe, label: "Language", value: "English", link: "#" },
         {
           icon: Moon,
@@ -69,7 +88,7 @@ const Settings = () => {
 
   return (
     <MainLayout showRightSidebar={false}>
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto pb-20 md:pb-0">
         <h1 className="text-xl font-display font-bold mb-4 px-2">Settings</h1>
         
         {settingsSections.map((section) => (
@@ -85,14 +104,19 @@ const Settings = () => {
                       onClick={item.onChange}
                       className="w-full flex items-center justify-between px-4 py-3.5 hover:bg-muted/50 transition-colors"
                     >
-                      <div className="flex items-center gap-3">
-                        <item.icon className="w-5 h-5 text-muted-foreground" />
-                        <span className="text-sm">{item.label}</span>
+                      <div className="flex items-center gap-3 flex-1">
+                        <item.icon className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                        <div className="flex flex-col items-start">
+                          <span className="text-sm">{item.label}</span>
+                          {item.description && (
+                            <span className="text-xs text-muted-foreground">{item.description}</span>
+                          )}
+                        </div>
                       </div>
                       <div
                         className={`w-11 h-6 rounded-full transition-colors ${
                           item.checked ? "bg-primary" : "bg-muted"
-                        } relative`}
+                        } relative flex-shrink-0`}
                       >
                         <div
                           className={`absolute top-0.5 w-5 h-5 rounded-full bg-white transition-transform ${
