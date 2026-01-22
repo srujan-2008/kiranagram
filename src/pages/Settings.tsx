@@ -15,14 +15,28 @@ import {
   Lock,
   CreditCard,
   Users,
+  Check,
+  X,
 } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useTranslation } from "react-i18next";
 import { MainLayout } from "@/components/layout/MainLayout";
+import { languages } from "@/i18n/translations";
 
 const Settings = () => {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
+  const { t, i18n } = useTranslation();
   const [isPrivateAccount, setIsPrivateAccount] = useState(false);
+  const [showLanguageModal, setShowLanguageModal] = useState(false);
+
+  const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
+
+  const handleLanguageChange = (langCode: string) => {
+    i18n.changeLanguage(langCode);
+    localStorage.setItem('language', langCode);
+    setShowLanguageModal(false);
+  };
 
   const handleLogout = () => {
     navigate("/login");
@@ -30,39 +44,44 @@ const Settings = () => {
 
   const settingsSections = [
     {
-      title: "Account",
+      title: t('settings.account'),
       items: [
-        { icon: User, label: "Edit Profile", link: "/edit-profile" },
-        { icon: Lock, label: "Change Password", link: "#" },
-        { icon: Smartphone, label: "Two-Factor Authentication", link: "#" },
-        { icon: CreditCard, label: "Payment Methods", link: "#" },
+        { icon: User, label: t('settings.editProfile'), link: "/edit-profile" },
+        { icon: Lock, label: t('settings.changePassword'), link: "#" },
+        { icon: Smartphone, label: t('settings.twoFactor'), link: "#" },
+        { icon: CreditCard, label: t('settings.paymentMethods'), link: "#" },
       ],
     },
     {
-      title: "Privacy",
+      title: t('settings.privacy'),
       items: [
         {
           icon: Users,
-          label: "Private Account",
+          label: t('settings.privateAccount'),
           toggle: true,
           checked: isPrivateAccount,
           onChange: () => setIsPrivateAccount(!isPrivateAccount),
           description: isPrivateAccount 
-            ? "Only approved followers can see your posts" 
-            : "Anyone can see your posts",
+            ? t('settings.privateAccountOn')
+            : t('settings.privateAccountOff'),
         },
-        { icon: Eye, label: "Activity Status", link: "#" },
-        { icon: Shield, label: "Blocked Accounts", link: "#" },
+        { icon: Eye, label: t('settings.activityStatus'), link: "#" },
+        { icon: Shield, label: t('settings.blockedAccounts'), link: "#" },
       ],
     },
     {
-      title: "Preferences",
+      title: t('settings.preferences'),
       items: [
-        { icon: Bell, label: "Notifications", link: "#" },
-        { icon: Globe, label: "Language", value: "English", link: "#" },
+        { icon: Bell, label: t('settings.notifications'), link: "#" },
+        { 
+          icon: Globe, 
+          label: t('settings.language'), 
+          value: currentLanguage.nativeName,
+          isLanguage: true,
+        },
         {
           icon: Moon,
-          label: "Dark Mode",
+          label: t('settings.darkMode'),
           toggle: true,
           checked: theme === "dark",
           onChange: () => setTheme(theme === "dark" ? "light" : "dark"),
@@ -70,18 +89,18 @@ const Settings = () => {
       ],
     },
     {
-      title: "Security",
+      title: t('settings.security'),
       items: [
-        { icon: Shield, label: "Security Settings", link: "#" },
-        { icon: Smartphone, label: "Active Sessions", link: "#" },
+        { icon: Shield, label: t('settings.securitySettings'), link: "#" },
+        { icon: Smartphone, label: t('settings.activeSessions'), link: "#" },
       ],
     },
     {
-      title: "Support",
+      title: t('settings.support'),
       items: [
-        { icon: HelpCircle, label: "Help Center", link: "#" },
-        { icon: FileText, label: "Terms of Service", link: "/terms" },
-        { icon: FileText, label: "Privacy Policy", link: "/privacy" },
+        { icon: HelpCircle, label: t('settings.helpCenter'), link: "#" },
+        { icon: FileText, label: t('settings.termsOfService'), link: "/terms" },
+        { icon: FileText, label: t('settings.privacyPolicy'), link: "/privacy" },
       ],
     },
   ];
@@ -89,7 +108,7 @@ const Settings = () => {
   return (
     <MainLayout showRightSidebar={false}>
       <div className="max-w-2xl mx-auto pb-20 md:pb-0">
-        <h1 className="text-xl font-display font-bold mb-4 px-2">Settings</h1>
+        <h1 className="text-xl font-display font-bold mb-4 px-2">{t('settings.title')}</h1>
         
         {settingsSections.map((section) => (
           <div key={section.title} className="py-3">
@@ -125,9 +144,23 @@ const Settings = () => {
                         />
                       </div>
                     </button>
+                  ) : item.isLanguage ? (
+                    <button
+                      onClick={() => setShowLanguageModal(true)}
+                      className="w-full flex items-center justify-between px-4 py-3.5 hover:bg-muted/50 transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        <item.icon className="w-5 h-5 text-muted-foreground" />
+                        <span className="text-sm">{item.label}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm text-muted-foreground">{item.value}</span>
+                        <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                      </div>
+                    </button>
                   ) : (
                     <Link
-                      to={item.link}
+                      to={item.link || "#"}
                       className="flex items-center justify-between px-4 py-3.5 hover:bg-muted/50 transition-colors"
                     >
                       <div className="flex items-center gap-3">
@@ -158,7 +191,7 @@ const Settings = () => {
             className="w-full flex items-center justify-center gap-2 py-3 bg-destructive/10 text-destructive hover:bg-destructive/20 rounded-xl font-medium transition-colors"
           >
             <LogOut className="w-5 h-5" />
-            Log Out
+            {t('nav.logout')}
           </button>
         </div>
 
@@ -167,6 +200,40 @@ const Settings = () => {
           Kiranagram v1.0.0
         </p>
       </div>
+
+      {/* Language Selection Modal */}
+      {showLanguageModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4">
+          <div className="bg-card border border-border rounded-2xl w-full max-w-sm overflow-hidden shadow-xl animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between p-4 border-b border-border">
+              <h3 className="font-semibold text-lg">{t('settings.selectLanguage')}</h3>
+              <button 
+                onClick={() => setShowLanguageModal(false)}
+                className="p-2 rounded-full hover:bg-muted transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="max-h-[60vh] overflow-y-auto">
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => handleLanguageChange(lang.code)}
+                  className="w-full flex items-center justify-between px-4 py-3.5 hover:bg-muted/50 transition-colors"
+                >
+                  <div className="flex flex-col items-start">
+                    <span className="text-sm font-medium">{lang.nativeName}</span>
+                    <span className="text-xs text-muted-foreground">{lang.name}</span>
+                  </div>
+                  {i18n.language === lang.code && (
+                    <Check className="w-5 h-5 text-primary" />
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </MainLayout>
   );
 };

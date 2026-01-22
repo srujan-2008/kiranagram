@@ -82,7 +82,7 @@ const Explore = () => {
 
   return (
     <MainLayout showRightSidebar={false}>
-      <div className="max-w-6xl mx-auto pb-24 md:pb-8 px-3 md:px-4 overflow-x-hidden">
+      <div className="max-w-6xl mx-auto pb-24 md:pb-8 px-3 md:px-4 overflow-x-hidden w-full" style={{ maxWidth: '100vw' }}>
         
         {/* Header with Search & Shuffle */}
         <div className="flex items-center gap-3 mb-6">
@@ -108,7 +108,7 @@ const Explore = () => {
         </div>
 
         {/* Style Categories - Horizontal Scroll */}
-        <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide -mx-3 px-3 mb-6">
+        <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide mb-6 w-full" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {styleCategories.map((cat) => (
             <button
               key={cat.id}
@@ -218,7 +218,7 @@ const Explore = () => {
               See all <ChevronRight className="w-4 h-4" />
             </button>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-3 px-3">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide w-full" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {topCreators.map((creator, index) => (
               <div 
                 key={creator.id}
@@ -252,18 +252,18 @@ const Explore = () => {
         <div className="mb-6">
           <h3 className="text-lg font-display font-semibold mb-4">Discover Art</h3>
           <div className={cn(
-            "grid gap-3 transition-opacity duration-300",
+            "grid gap-2 md:gap-3 transition-opacity duration-300 w-full",
             isShuffling && "opacity-50"
           )} style={{
-            gridTemplateColumns: 'repeat(6, 1fr)',
-            gridAutoRows: '100px'
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gridAutoRows: '80px'
           }}>
             {discoveryGrid.map((item, index) => {
               // Create unique sizing for each item
               const sizeClasses = {
-                large: "col-span-3 row-span-3 md:col-span-2 md:row-span-3",
-                medium: "col-span-3 row-span-2 md:col-span-2 md:row-span-2",
-                small: "col-span-2 row-span-2 md:col-span-2 md:row-span-2"
+                large: "col-span-2 row-span-2",
+                medium: "col-span-1 row-span-2",
+                small: "col-span-1 row-span-2"
               };
               
               return (
