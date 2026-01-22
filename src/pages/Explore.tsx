@@ -82,7 +82,7 @@ const Explore = () => {
 
   return (
     <MainLayout showRightSidebar={false}>
-      <div className="max-w-6xl mx-auto pb-24 md:pb-8 px-3 md:px-4">
+      <div className="max-w-6xl mx-auto pb-24 md:pb-8 px-3 md:px-4 overflow-x-hidden">
         
         {/* Header with Search & Shuffle */}
         <div className="flex items-center gap-3 mb-6">
