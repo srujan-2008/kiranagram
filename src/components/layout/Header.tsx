@@ -21,16 +21,8 @@ export function Header() {
           <span className="font-display font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">Kiranagram</span>
         </Link>
 
-        {/* Desktop Search Bar - Hidden on mobile */}
-        <div className="hidden lg:flex flex-1 max-w-xl mx-4">
-          <div className="relative w-full">
-            <input
-              type="text"
-              placeholder="Search creators, assets, or inspiration..."
-              className="w-full pl-12 pr-16 py-3 bg-muted/50 border border-border rounded-xl text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
-            />
-          </div>
-        </div>
+        {/* Spacer for desktop layout */}
+        <div className="hidden lg:flex flex-1" />
 
         {/* Right Actions - Simplified for mobile */}
         <div className="flex items-center gap-2 lg:gap-3">

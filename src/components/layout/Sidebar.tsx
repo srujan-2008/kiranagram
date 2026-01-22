@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, Compass, Plus, Sparkles, User, Menu, X } from "lucide-react";
+import { Home, Compass, Plus, Sparkles, User, Menu, X, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import avatar2 from "@/assets/avatar-2.jpg";
 
@@ -9,6 +9,7 @@ interface NavItem {
   label: string;
   path: string;
   isCreate?: boolean;
+  isPublisher?: boolean;
 }
 
 const navItems: NavItem[] = [
@@ -18,6 +19,13 @@ const navItems: NavItem[] = [
   { icon: Sparkles, label: "AI Creator", path: "/ai-creator" },
   { icon: User, label: "Profile", path: "/profile" },
 ];
+
+const publisherItem: NavItem = { 
+  icon: UserPlus, 
+  label: "Become a Publisher", 
+  path: "/become-publisher", 
+  isPublisher: true 
+};
 
 export function Sidebar() {
   const location = useLocation();
@@ -67,6 +75,23 @@ export function Sidebar() {
               <span className="font-medium">{item.label}</span>
             </Link>
           ))}
+          
+          {/* Become a Publisher - Desktop Only */}
+          <div className="pt-4 mt-4 border-t border-border">
+            <Link
+              to={publisherItem.path}
+              onClick={() => setIsOpen(false)}
+              className={cn(
+                "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group relative",
+                isActive(publisherItem.path)
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:bg-muted/50 hover:text-foreground border border-dashed border-primary/30 hover:border-primary/60"
+              )}
+            >
+              <publisherItem.icon className="w-5 h-5" />
+              <span className="font-medium">{publisherItem.label}</span>
+            </Link>
+          </div>
         </nav>
 
         {/* User Profile */}
