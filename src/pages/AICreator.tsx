@@ -3,14 +3,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { 
   ArrowLeft, ArrowRight, User, Mail, Phone, Calendar, Instagram, Youtube, Facebook, 
   Upload, CheckCircle, Clock, Camera, IndianRupee, Plus, FileText, Edit, 
-  Heart, MessageCircle, TrendingUp, Settings, Share2, BadgeCheck, Award
+  Heart, MessageCircle, TrendingUp, Settings, Share2, BadgeCheck, Award,
+  MessageSquare, Send, Users
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MainLayout } from "@/components/layout/MainLayout";
+import { useTranslation } from "react-i18next";
 import avatar2 from "@/assets/avatar-2.jpg";
 import heroBanner from "@/assets/hero-banner.jpg";
 
 const steps = ["Personal", "Social Media", "Documents", "Review"];
+
+// Social Media Links for display
+const socialLinks = [
+  { icon: Instagram, label: "Instagram", url: "@elaravance", color: "from-pink-500 to-purple-500" },
+  { icon: Facebook, label: "Facebook", url: "fb.com/elaravance", color: "from-blue-600 to-blue-500" },
+  { icon: Send, label: "Telegram", url: "t.me/elaravance", color: "from-blue-400 to-cyan-400" },
+  { icon: MessageSquare, label: "WhatsApp", url: "+91 98765 43210", color: "from-green-500 to-emerald-400" },
+];
 
 const AICreator = () => {
   const navigate = useNavigate();
@@ -95,10 +105,12 @@ const AICreator = () => {
 
   // Dashboard after approval - Profile style
   if (isApproved) {
+    const { t } = useTranslation();
+    
     const stats = [
-      { label: "Prompts", value: "12" },
-      { label: "Remixes", value: "1.2K" },
-      { label: "Followers", value: "4.8K" },
+      { label: t('aiCreator.prompts'), value: "12" },
+      { label: t('aiCreator.remixes'), value: "1.2K" },
+      { label: t('aiCreator.followers'), value: "4.8K" },
     ];
 
     return (
@@ -176,13 +188,41 @@ const AICreator = () => {
             </div>
 
             {/* Bio */}
-            <div className="mt-4 mb-6">
+            <div className="mt-4 mb-4">
               <p className="text-foreground text-sm">
                 AI Artist & Digital Creator 🎨 Creating unique AI styles and prompts. Top 1% Creator.
               </p>
               <div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
                 <Award className="w-4 h-4 text-primary" />
                 <span>Verified AI Creator</span>
+              </div>
+            </div>
+
+            {/* Social Media Links */}
+            <div className="mb-6">
+              <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                <Users className="w-4 h-4 text-primary" />
+                {t('aiCreator.socialLinks')}
+              </h3>
+              <div className="grid grid-cols-2 gap-2">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href="#"
+                    className="flex items-center gap-2 p-3 rounded-xl bg-muted/50 hover:bg-muted transition-colors group"
+                  >
+                    <div className={cn(
+                      "w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br",
+                      social.color
+                    )}>
+                      <social.icon className="w-4 h-4 text-white" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs text-muted-foreground">{social.label}</p>
+                      <p className="text-xs font-medium truncate">{social.url}</p>
+                    </div>
+                  </a>
+                ))}
               </div>
             </div>
           </div>
@@ -196,7 +236,7 @@ const AICreator = () => {
               <div className="w-11 h-11 rounded-xl bg-green-500/20 flex items-center justify-center mb-3">
                 <IndianRupee className="w-5 h-5 text-green-500" />
               </div>
-              <h3 className="font-semibold mb-0.5">Earnings</h3>
+              <h3 className="font-semibold mb-0.5">{t('aiCreator.earnings')}</h3>
               <p className="text-xs text-muted-foreground">View analytics</p>
             </Link>
 
@@ -207,7 +247,7 @@ const AICreator = () => {
               <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
                 <Plus className="w-5 h-5 text-primary" />
               </div>
-              <h3 className="font-semibold mb-0.5">Add New Prompt</h3>
+              <h3 className="font-semibold mb-0.5">{t('aiCreator.addPrompt')}</h3>
               <p className="text-xs text-muted-foreground">Create AI style</p>
             </Link>
 
@@ -218,7 +258,7 @@ const AICreator = () => {
               <div className="w-11 h-11 rounded-xl bg-secondary/10 flex items-center justify-center mb-3">
                 <FileText className="w-5 h-5 text-secondary" />
               </div>
-              <h3 className="font-semibold mb-0.5">My Prompts</h3>
+              <h3 className="font-semibold mb-0.5">{t('aiCreator.myPrompts')}</h3>
               <p className="text-xs text-muted-foreground">Manage styles</p>
             </Link>
 
@@ -229,7 +269,7 @@ const AICreator = () => {
               <div className="w-11 h-11 rounded-xl bg-pink-500/10 flex items-center justify-center mb-3">
                 <Edit className="w-5 h-5 text-pink-500" />
               </div>
-              <h3 className="font-semibold mb-0.5">Edit Profile</h3>
+              <h3 className="font-semibold mb-0.5">{t('aiCreator.editProfile')}</h3>
               <p className="text-xs text-muted-foreground">Update info</p>
             </Link>
           </div>
