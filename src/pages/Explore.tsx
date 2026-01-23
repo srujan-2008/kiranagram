@@ -15,20 +15,19 @@ import {
   Crown
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTranslation } from "react-i18next";
 import cyberGirl from "@/assets/cyber-girl.jpg";
 import avatar1 from "@/assets/avatar-1.jpg";
 import avatar2 from "@/assets/avatar-2.jpg";
 import avatar3 from "@/assets/avatar-3.jpg";
 import heroBanner from "@/assets/hero-banner.jpg";
 
-const getStyleCategories = (t: (key: string) => string) => [
-  { id: "all", label: t('discover.forYou'), icon: Sparkles, gradient: "from-primary to-secondary" },
-  { id: "trending", label: t('discover.hotNow'), icon: Flame, gradient: "from-orange-500 to-red-500" },
-  { id: "neon", label: t('discover.neonGlow'), icon: Zap, gradient: "from-cyan-400 to-blue-500" },
-  { id: "artistic", label: t('discover.artistic'), icon: Palette, gradient: "from-purple-500 to-pink-500" },
-  { id: "fantasy", label: t('discover.fantasy'), icon: Wand2, gradient: "from-emerald-400 to-teal-500" },
-  { id: "portrait", label: t('discover.portraits'), icon: Camera, gradient: "from-amber-400 to-orange-500" },
+const styleCategories = [
+  { id: "all", label: "For You", icon: Sparkles, gradient: "from-primary to-secondary" },
+  { id: "trending", label: "Hot Now", icon: Flame, gradient: "from-orange-500 to-red-500" },
+  { id: "neon", label: "Neon Glow", icon: Zap, gradient: "from-cyan-400 to-blue-500" },
+  { id: "artistic", label: "Artistic", icon: Palette, gradient: "from-purple-500 to-pink-500" },
+  { id: "fantasy", label: "Fantasy", icon: Wand2, gradient: "from-emerald-400 to-teal-500" },
+  { id: "portrait", label: "Portraits", icon: Camera, gradient: "from-amber-400 to-orange-500" },
 ];
 
 const spotlightArt = {
@@ -65,8 +64,6 @@ const topCreators = [
 ];
 
 const Explore = () => {
-  const { t } = useTranslation();
-  const styleCategories = getStyleCategories(t);
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [isShuffling, setIsShuffling] = useState(false);
@@ -85,11 +82,7 @@ const Explore = () => {
 
   return (
     <MainLayout showRightSidebar={false}>
-      <div className="max-w-6xl mx-auto pb-24 md:pb-8 px-3 md:px-4 w-full overflow-x-hidden" style={{ overflowX: 'hidden', maxWidth: '100%' }}>
-        <style>{`
-          .scrollbar-hide::-webkit-scrollbar { display: none; }
-          .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        `}</style>
+      <div className="max-w-6xl mx-auto pb-24 md:pb-8 px-3 md:px-4 overflow-x-hidden w-full" style={{ maxWidth: '100vw' }}>
         
         {/* Header with Search & Shuffle */}
         <div className="flex items-center gap-3 mb-6">
@@ -99,7 +92,7 @@ const Explore = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={t('discover.searchPlaceholder')}
+              placeholder="Discover AI styles, creators..."
               className="w-full pl-12 pr-4 py-3 bg-card border border-border rounded-2xl text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
             />
           </div>
@@ -150,7 +143,7 @@ const Explore = () => {
           {/* Spotlight Badge */}
           <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/90 text-primary-foreground text-xs font-semibold backdrop-blur-sm">
             <Crown className="w-3.5 h-3.5" />
-            {t('discover.todaySpotlight')}
+            Today's Spotlight
           </div>
           
           {/* Content */}
@@ -185,9 +178,9 @@ const Explore = () => {
         {/* Featured Styles */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-display font-semibold">{t('discover.trendingStyles')}</h3>
+            <h3 className="text-lg font-display font-semibold">Trending Styles</h3>
             <button className="flex items-center gap-1 text-sm text-primary hover:underline">
-              {t('discover.seeAll')} <ChevronRight className="w-4 h-4" />
+              See all <ChevronRight className="w-4 h-4" />
             </button>
           </div>
           <div className="grid grid-cols-3 gap-3">
@@ -210,7 +203,7 @@ const Explore = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-3">
                   <p className="font-semibold text-sm truncate">{style.name}</p>
-                  <p className="text-xs text-muted-foreground">{style.uses} {t('discover.uses')}</p>
+                  <p className="text-xs text-muted-foreground">{style.uses} uses</p>
                 </div>
               </div>
             ))}
@@ -220,9 +213,9 @@ const Explore = () => {
         {/* Top Creators */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-display font-semibold">{t('discover.topCreators')}</h3>
+            <h3 className="text-lg font-display font-semibold">Top Creators</h3>
             <button className="flex items-center gap-1 text-sm text-primary hover:underline">
-              {t('discover.seeAll')} <ChevronRight className="w-4 h-4" />
+              See all <ChevronRight className="w-4 h-4" />
             </button>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide w-full" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
@@ -257,7 +250,7 @@ const Explore = () => {
 
         {/* Discovery Grid - Unique Layout */}
         <div className="mb-6">
-          <h3 className="text-lg font-display font-semibold mb-4">{t('discover.discoverArt')}</h3>
+          <h3 className="text-lg font-display font-semibold mb-4">Discover Art</h3>
           <div className={cn(
             "grid gap-2 md:gap-3 transition-opacity duration-300 w-full",
             isShuffling && "opacity-50"
@@ -312,7 +305,7 @@ const Explore = () => {
         {/* Load More */}
         <div className="flex justify-center">
           <button className="px-8 py-3 rounded-2xl bg-card border border-border hover:border-primary/50 hover:bg-primary/5 transition-all font-medium">
-            {t('discover.exploreMore')}
+            Explore More
           </button>
         </div>
       </div>

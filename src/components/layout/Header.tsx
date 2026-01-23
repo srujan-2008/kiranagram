@@ -1,6 +1,7 @@
-import { Sun, Moon, Bell, MessageSquare } from "lucide-react";
+import { Sun, Moon, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTheme } from "next-themes";
+import avatar2 from "@/assets/avatar-2.jpg";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -23,7 +24,7 @@ export function Header() {
         {/* Spacer for desktop layout */}
         <div className="hidden lg:flex flex-1" />
 
-        {/* Right Actions */}
+        {/* Right Actions - Simplified for mobile */}
         <div className="flex items-center gap-2 lg:gap-3">
           {/* Theme toggle - visible on all screens */}
           <button 
@@ -44,10 +45,13 @@ export function Header() {
             <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full" />
           </button>
           
-          {/* Messages - LinkedIn style chat icon */}
-          <Link to="/messages" className="relative p-2 hover:bg-muted rounded-lg transition-colors">
-            <MessageSquare className="w-5 h-5 text-muted-foreground" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full" />
+          {/* Profile - only on desktop */}
+          <Link to="/profile" className="hidden lg:block">
+            <img
+              src={avatar2}
+              alt="Profile"
+              className="w-9 h-9 rounded-full object-cover ring-2 ring-primary/50"
+            />
           </Link>
         </div>
       </div>
