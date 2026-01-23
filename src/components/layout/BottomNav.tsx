@@ -1,24 +1,26 @@
 import { Link, useLocation } from "react-router-dom";
 import { Home, Compass, Plus, Sparkles, User } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 interface NavItem {
   icon: React.ElementType;
-  label: string;
+  labelKey: string;
   path: string;
   isCreate?: boolean;
 }
 
 const navItems: NavItem[] = [
-  { icon: Home, label: "Feeds", path: "/" },
-  { icon: Compass, label: "Discover", path: "/explore" },
-  { icon: Plus, label: "Create", path: "/create", isCreate: true },
-  { icon: Sparkles, label: "AI Creator", path: "/ai-creator" },
-  { icon: User, label: "Profile", path: "/profile" },
+  { icon: Home, labelKey: "nav.home", path: "/" },
+  { icon: Compass, labelKey: "nav.discover", path: "/explore" },
+  { icon: Plus, labelKey: "nav.create", path: "/create", isCreate: true },
+  { icon: Sparkles, labelKey: "nav.aiCreator", path: "/ai-creator" },
+  { icon: User, labelKey: "nav.profile", path: "/profile" },
 ];
 
 export function BottomNav() {
   const location = useLocation();
+  const { t } = useTranslation();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -49,7 +51,7 @@ export function BottomNav() {
               "text-[10px] font-medium",
               item.isCreate && "mt-1"
             )}>
-              {item.label}
+              {t(item.labelKey)}
             </span>
           </Link>
         ))}

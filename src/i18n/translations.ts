@@ -72,6 +72,27 @@ export const translations = {
         likes: "Likes",
         views: "Views",
       },
+      // Messages Page
+      messages: {
+        title: "Messages",
+        searchPlaceholder: "Search conversations...",
+        typePlaceholder: "Type a message...",
+        online: "Online",
+        offline: "Offline",
+        selectChat: "Select a conversation",
+        selectChatDesc: "Choose from your existing conversations or start a new chat",
+      },
+      // AI Creator
+      aiCreator: {
+        prompts: "Prompts",
+        remixes: "Remixes",
+        followers: "Followers",
+        earnings: "Earnings",
+        editProfile: "Edit Profile",
+        addPrompt: "Add New Prompt",
+        myPrompts: "My Prompts",
+        socialLinks: "Social Links",
+      },
       // Auth
       auth: {
         email: "Email",
@@ -152,6 +173,25 @@ export const translations = {
         posts: "पोस्ट",
         likes: "पसंद",
         views: "व्यूज",
+      },
+      messages: {
+        title: "संदेश",
+        searchPlaceholder: "बातचीत खोजें...",
+        typePlaceholder: "संदेश लिखें...",
+        online: "ऑनलाइन",
+        offline: "ऑफलाइन",
+        selectChat: "बातचीत चुनें",
+        selectChatDesc: "अपनी मौजूदा बातचीत में से चुनें या नई चैट शुरू करें",
+      },
+      aiCreator: {
+        prompts: "प्रॉम्प्ट्स",
+        remixes: "रीमिक्स",
+        followers: "अनुयायी",
+        earnings: "कमाई",
+        editProfile: "प्रोफ़ाइल संपादित करें",
+        addPrompt: "नया प्रॉम्प्ट जोड़ें",
+        myPrompts: "मेरे प्रॉम्प्ट्स",
+        socialLinks: "सोशल लिंक्स",
       },
       auth: {
         email: "ईमेल",

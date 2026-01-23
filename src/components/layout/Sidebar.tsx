@@ -2,27 +2,28 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, Compass, Plus, Sparkles, User, Menu, X, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 import avatar2 from "@/assets/avatar-2.jpg";
 
 interface NavItem {
   icon: React.ElementType;
-  label: string;
+  labelKey: string;
   path: string;
   isCreate?: boolean;
   isPublisher?: boolean;
 }
 
 const navItems: NavItem[] = [
-  { icon: Home, label: "Feeds", path: "/" },
-  { icon: Compass, label: "Discover", path: "/explore" },
-  { icon: Plus, label: "Create New", path: "/create", isCreate: true },
-  { icon: Sparkles, label: "AI Creator", path: "/ai-creator" },
-  { icon: User, label: "Profile", path: "/profile" },
+  { icon: Home, labelKey: "nav.home", path: "/" },
+  { icon: Compass, labelKey: "nav.discover", path: "/explore" },
+  { icon: Plus, labelKey: "nav.create", path: "/create", isCreate: true },
+  { icon: Sparkles, labelKey: "nav.aiCreator", path: "/ai-creator" },
+  { icon: User, labelKey: "nav.profile", path: "/profile" },
 ];
 
 const publisherItem: NavItem = { 
   icon: UserPlus, 
-  label: "Become a Publisher", 
+  labelKey: "nav.becomePublisher", 
   path: "/become-publisher", 
   isPublisher: true 
 };
@@ -30,6 +31,7 @@ const publisherItem: NavItem = {
 export function Sidebar() {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -72,7 +74,7 @@ export function Sidebar() {
                 <span className="absolute left-0 w-1 h-8 bg-primary rounded-r-full" />
               )}
               <item.icon className="w-5 h-5" />
-              <span className="font-medium">{item.label}</span>
+              <span className="font-medium">{t(item.labelKey)}</span>
             </Link>
           ))}
           
@@ -89,7 +91,7 @@ export function Sidebar() {
               )}
             >
               <publisherItem.icon className="w-5 h-5" />
-              <span className="font-medium">{publisherItem.label}</span>
+              <span className="font-medium">{t(publisherItem.labelKey)}</span>
             </Link>
           </div>
         </nav>
